@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>天空的呼吸 - 台灣空汙期末專題</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700&family=Zhi+Mang+Xing&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ghibli-blue: #1e3a5f;
+            --ghibli-cream: #f9f4e8;
+            --ghibli-green: #4a6741;
+            --ghibli-orange: #e67e22;
+        }
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: var(--ghibli-blue);
+            color: var(--ghibli-cream);
+            overflow-x: hidden;
+            margin: 0;
+        }
+
+        .ghibli-title {
+            font-family: 'Zhi Mang Xing', cursive;
+        }
+
+        /* 夜晚背景動畫 */
+        #night-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: twinkle var(--duration) infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        .shooting-star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: linear-gradient(90deg, white, transparent);
+            animation: shoot 5s infinite;
+        }
+
+        @keyframes shoot {
+            0% { transform: translateX(0) translateY(0) rotate(-45deg); opacity: 1; }
+            20% { transform: translateX(300px) translateY(300px) rotate(-45deg); opacity: 0; }
+            100% { transform: translateX(300px) translateY(300px) rotate(-45deg); opacity: 0; }
+        }
+
+        /* 內容區塊裝飾 */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        .btn-ghibli {
+            background-color: var(--ghibli-green);
+            color: white;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .btn-ghibli:hover {
+            background-color: transparent;
+            border-color: var(--ghibli-green);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(74, 103, 65, 0.4);
+        }
+
+        .cloud {
+            position: absolute;
+            opacity: 0.2;
+            pointer-events: none;
+            animation: drift var(--d) linear infinite;
+        }
+
+        @keyframes drift {
+            from { left: -200px; }
+            to { left: 100vw; }
+        }
+
+        .section-visible {
+            animation: fadeIn 1.2s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 動畫背景層 -->
+    <div id="night-bg"></div>
+
+    <!-- 導航列 -->
+    <nav class="fixed w-full z-50 px-6 py-4 flex justify-between items-center">
+        <div class="text-2xl font-bold ghibli-title tracking-wider">天空的呼吸</div>
+        <div class="space-x-6 hidden md:flex">
+            <a href="#intro" class="hover:text-orange-300 transition">主題介紹</a>
+            <a href="#data" class="hover:text-orange-300 transition">空汙現況</a>
+            <a href="#download" class="hover:text-orange-300 transition">專案下載</a>
+        </div>
+    </nav>
+
+    <!-- 英雄區塊 -->
+    <header class="relative h-screen flex flex-col items-center justify-center text-center px-4">
+        <h1 class="text-6xl md:text-8xl ghibli-title mb-6 section-visible">尋找消失的藍天</h1>
+        <p class="text-lg md:text-2xl max-w-2xl font-light leading-relaxed opacity-90 section-visible" style="animation-delay: 0.3s">
+            在晚風吹拂的台灣街道，我們是否曾停下腳步，看一看那一層籠罩在城市上方的灰色薄霧？
+        </p>
+        <div class="mt-10 animate-bounce">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+        </div>
+    </header>
+
+    <!-- 主題介紹 -->
+    <section id="intro" class="py-20 px-6 max-w-5xl mx-auto">
+        <div class="glass-card">
+            <h2 class="text-3xl ghibli-title border-b border-white/20 pb-4 mb-6">專題動機</h2>
+            <div class="grid md:grid-cols-2 gap-10 items-center">
+                <div class="space-y-4 leading-loose text-gray-200">
+                    <p>台灣因其特殊的地理位置與產業結構，空氣污染一直是社會關注的重要議題。從中南部的季節性霧霾，到城市中的交通廢氣，PM2.5 已悄然成為我們生活中的一部分。</p>
+                    <p>本專題試圖以「吉卜力式」的柔和視角，反思工業發展與自然環境之間的矛盾。我們不只是在研究數據，更是在關心這片土地的呼吸。</p>
+                </div>
+                <div class="rounded-lg overflow-hidden shadow-2xl rotate-2">
+                    <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb773b09?auto=format&fit=crop&q=80&w=800" alt="煙囪與天空的對比" class="w-full h-64 object-cover" onerror="this.src='https://via.placeholder.com/800x600?text=Nature+and+Industrial'">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 空汙數據模擬展示 -->
+    <section id="data" class="py-20 px-6 max-w-5xl mx-auto">
+        <h2 class="text-4xl ghibli-title text-center mb-12">我們面臨的灰暗角落</h2>
+        <div class="grid md:grid-cols-3 gap-6">
+            <div class="glass-card text-center hover:scale-105 transition duration-500">
+                <div class="text-orange-400 text-4xl mb-4">●</div>
+                <h3 class="text-xl font-bold mb-2">PM2.5 懸浮微粒</h3>
+                <p class="text-sm opacity-80">能深入肺泡，來源多為工廠燃燒與境外輸入，是健康的最大殺手。</p>
+            </div>
+            <div class="glass-card text-center hover:scale-105 transition duration-500">
+                <div class="text-blue-400 text-4xl mb-4">●</div>
+                <h3 class="text-xl font-bold mb-2">NOx 氮氧化物</h3>
+                <p class="text-sm opacity-80">主要來自汽機車排放，在陽光照射下會反應生成臭氧。</p>
+            </div>
+            <div class="glass-card text-center hover:scale-105 transition duration-500">
+                <div class="text-green-400 text-4xl mb-4">●</div>
+                <h3 class="text-xl font-bold mb-2">工業排放</h3>
+                <p class="text-sm opacity-80">重工業聚落的排放，讓某些地區的居民長年與口罩為伍。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 執行檔下載區 -->
+    <section id="download" class="py-24 px-6 text-center">
+        <div class="max-w-3xl mx-auto glass-card py-16 border-dashed border-2 border-white/30">
+            <h2 class="text-4xl ghibli-title mb-6">探索研究成果</h2>
+            <p class="mb-10 text-gray-300">我們開發了一個「台灣空汙模擬分析系統」，透過互動介面展示各年度污染排放與地形關係。</p>
+            <div class="flex flex-col md:flex-row justify-center gap-4">
+                <button onclick="mockDownload()" class="btn-ghibli px-10 py-4 rounded-full font-bold flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                    下載專案執行檔 (.exe)
+                </button>
+                <button onclick="mockDownload()" class="bg-white/10 hover:bg-white/20 px-10 py-4 rounded-full font-bold transition">
+                    查看研究論文 (.pdf)
+                </button>
+            </div>
+            <p id="status-msg" class="mt-6 text-orange-300 h-6"></p>
+        </div>
+    </section>
+
+    <footer class="py-10 text-center opacity-60 text-sm">
+        <p>© 2024 台灣空汙高中期末專案 - 獻給每一顆愛護土地的心</p>
+    </footer>
+
+    <script>
+        // 初始化背景星星
+        function initStars() {
+            const bg = document.getElementById('night-bg');
+            const starCount = 150;
+
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                const size = Math.random() * 3 + 'px';
+                star.style.width = size;
+                star.style.height = size;
+                star.style.left = Math.random() * 100 + 'vw';
+                star.style.top = Math.random() * 100 + 'vh';
+                star.style.setProperty('--duration', (Math.random() * 3 + 2) + 's');
+                star.style.animationDelay = Math.random() * 5 + 's';
+                bg.appendChild(star);
+            }
+
+            // 流星
+            setInterval(() => {
+                const shootingStar = document.createElement('div');
+                shootingStar.className = 'shooting-star';
+                shootingStar.style.left = Math.random() * 80 + 'vw';
+                shootingStar.style.top = Math.random() * 40 + 'vh';
+                bg.appendChild(shootingStar);
+                setTimeout(() => shootingStar.remove(), 5000);
+            }, 8000);
+        }
+
+        // 模擬飄動的雲 (吉卜力風)
+        function initClouds() {
+            const bg = document.getElementById('night-bg');
+            for (let i = 0; i < 5; i++) {
+                const cloud = document.createElement('div');
+                cloud.className = 'cloud';
+                cloud.innerHTML = `
+                    <svg width="200" height="100" viewBox="0 0 200 100" fill="white">
+                        <circle cx="50" cy="60" r="30" />
+                        <circle cx="90" cy="50" r="40" />
+                        <circle cx="140" cy="60" r="35" />
+                    </svg>
+                `;
+                cloud.style.top = (Math.random() * 80) + 'vh';
+                cloud.style.setProperty('--d', (Math.random() * 60 + 40) + 's');
+                cloud.style.animationDelay = -(Math.random() * 100) + 's';
+                bg.appendChild(cloud);
+            }
+        }
+
+        // 下載模擬
+        function mockDownload() {
+            const msg = document.getElementById('status-msg');
+            msg.innerText = "正在準備檔案中，請稍候...";
+            setTimeout(() => {
+                msg.innerText = "檔案開始下載！(此為展示功能，無實際檔案)";
+                setTimeout(() => msg.innerText = "", 3000);
+            }, 1500);
+        }
+
+        // 頁面加載後執行
+        window.onload = () => {
+            initStars();
+            initClouds();
+            
+            // 滾動監測
+            const sections = document.querySelectorAll('section');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('section-visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            sections.forEach(s => observer.observe(s));
+        };
+    </script>
+</body>
+</html>
