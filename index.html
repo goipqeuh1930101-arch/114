@@ -178,12 +178,12 @@
     <section id="download" class="py-24 px-6 text-center">
         <div class="max-w-3xl mx-auto glass-card py-16 border-dashed border-2 border-white/30">
             <h2 class="text-4xl ghibli-title mb-6">探索研究成果</h2>
-            <p class="mb-10 text-gray-300">我們開發了一個「台灣空汙模擬分析系統」，透過互動介面展示各年度污染排放與地形關係。</p>
+            <p class="mb-10 text-gray-300">我們整合了環境部即時觀測數據，透過分析系統展示台灣各測站的污染指標與空氣品質。</p>
             <div class="flex flex-col md:flex-row justify-center gap-4">
-                <button onclick="mockDownload()" class="btn-ghibli px-10 py-4 rounded-full font-bold flex items-center justify-center gap-2">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                    下載專案執行檔 (.exe)
-                </button>
+                <a href="https://data.moenv.gov.tw/api/v2/aqx_p_432?api_key=e75b1660-e564-4107-aad5-a8be1f905dd9&limit=1000&format=CSV" target="_blank" class="btn-ghibli px-10 py-4 rounded-full font-bold flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                    下載即時空汙數據 (.csv)
+                </a>
                 <button onclick="mockDownload()" class="bg-white/10 hover:bg-white/20 px-10 py-4 rounded-full font-bold transition">
                     查看研究論文 (.pdf)
                 </button>
